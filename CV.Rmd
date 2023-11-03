@@ -3,7 +3,7 @@ name: Brendan
 surname: Casey
 date: "`r format(Sys.time(), '%B, %Y')`"
 address: Edmonton, Alberta
-position: "Ecologist | Data Scientist"
+position: "Ecologist"
 phone: 780 920 1787
 email: brendangerardcasey@gmail.com
 github: bgcasey
