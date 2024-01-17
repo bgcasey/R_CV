@@ -22,7 +22,7 @@ library(magrittr)
 source("Utils/data_download_funs.R")
 
 CV <- create_CV_object(
-  data_location = "https://docs.google.com/spreadsheets/d/1tSpQZonJ5j04TloVIxq3owVHa6w3kRJM8zYodJC7R28/edit?usp=sharing",  
+  data_location = "https://docs.google.com/spreadsheets/d/1WCbS4F12A5XbYANWllyHziMzK8f566hRTvYScZgNjIM/edit?usp=sharing",  
   pdf_mode = FALSE
 )
 ```
@@ -64,8 +64,11 @@ CV$entries_data %>%
 # Aditional Experience
 
 ```{r}
+
+
 CV$entries_data %>% 
   filter(section == 'additional') %>% 
+   filter(title != 'Reviewer') %>%
   detailed_entries(
     what = institution,
     when = glue::glue("{`start`} - {`end`}"),
