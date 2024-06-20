@@ -1,0 +1,122 @@
+---
+name: Brendan   
+surname: Casey
+date: "`r format(Sys.time(), '%B, %Y')`"
+address: Edmonton, Alberta
+position: "Ecologist"
+phone: 780 920 1787
+email: brendangerardcasey@gmail.com
+github: bgcasey
+header-includes:
+  - \setstretch{1.15}
+headcolor: 27AE60
+output:
+  vitae::awesomecv
+---
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+library(vitae)
+library(dplyr)
+library(magrittr)
+library(glue)
+source("Utils/data_download_funs.R")
+
+CV <- create_CV_object(
+  data_location = "https://docs.google.com/spreadsheets/d/1WCbS4F12A5XbYANWllyHziMzK8f566hRTvYScZgNjIM/edit?usp=sharing",  
+  pdf_mode = FALSE
+)
+
+# Compile cover letter
+library(tinytex)
+xelatex("coverletter.tex")
+```
+
+\vspace*{0.5cm}
+
+
+```{r, results='asis'}
+# CV %<>% print_text_block("intro") 
+```
+
+# Education
+
+```{r}
+CV$entries_data %>% 
+  filter(section == 'education') %>% 
+  detailed_entries(
+    what = institution,
+    when = glue::glue("{`start`} - {`end`}"),
+    with = title,
+    where = loc,
+    why = description_bullets
+  )
+```
+
+# Employment
+
+```{r}
+CV$entries_data %>% 
+  filter(section == 'industry_positions') %>% 
+  detailed_entries(
+    what = institution,
+    when = glue::glue("{`start`} - {`end`}"),
+    with = title,
+    where = loc,
+    why = description_bullets
+  )
+```
+
+# Aditional Experience
+
+```{r}
+
+
+CV$entries_data %>% 
+  filter(section == 'additional') %>% 
+   filter(title != 'Reviewer') %>%
+  detailed_entries(
+    what = institution,
+    when = glue::glue("{`start`} - {`end`}"),
+    with = title,
+    where = loc,
+    why = description_bullets
+  )
+```
+
+
+# Certifications
+
+```{r}
+CV$entries_data %>% 
+  filter(section == 'certifications') %>% 
+  detailed_entries(
+    what = institution,
+    when = glue::glue("{`start`}"),
+    with = title,
+    where = loc,
+    why = description_bullets
+  )
+```
+
+# Awards
+```{r}
+CV$entries_data %>% 
+  filter(section == 'awards') %>% 
+  detailed_entries(
+    what = institution,
+    when = glue::glue("{`end`}"),
+    with = title,
+    where = loc,
+    why = description_bullets
+  )
+```
+
+# Skills
+
+```{r, results='asis'}
+CV %>% print_skill()
+```
+
