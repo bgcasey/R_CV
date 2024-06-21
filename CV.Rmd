@@ -5,7 +5,7 @@ date: "`r format(Sys.time(), '%B, %Y')`"
 address: Edmonton, Alberta
 position: "Ecologist"
 phone: 780 920 1787
-email: brendangerardcasey@gmail.com
+email: bgcasey@ualberta.ca
 github: bgcasey
 header-includes:
   - \setstretch{1.15}
@@ -36,9 +36,13 @@ xelatex("coverletter.tex")
 
 \vspace*{0.5cm}
 
+# Qualifications and Research Interests
 
 ```{r, results='asis'}
-# CV %<>% print_text_block("intro") 
+# print text block and wrap in latex style to match the style in the coverletter
+cat("\\begin{lettertextstyle}")
+CV %<>% print_text_block("intro")
+cat("\\end{lettertextstyle}")
 ```
 
 # Education
@@ -86,7 +90,7 @@ CV$entries_data %>%
   )
 ```
 
-
+\newpage
 # Certifications
 
 ```{r}
@@ -119,4 +123,8 @@ CV$entries_data %>%
 ```{r, results='asis'}
 CV %>% print_skill()
 ```
+
+
+
+
 
